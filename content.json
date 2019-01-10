@@ -1,0 +1,21 @@
+{
+ "address": "1LX49GcJ52xF8UGvN1obXex6u4XLwfmzZW",
+ "description": "",
+ "files": {
+  "index.html": {
+   "sha512": "8d390f4900f1cd42a5ddf83eb99ab1de1014da7b2d653763cbad5be7d0faf0da",
+   "size": 41
+  }
+ },
+ "ignore": "",
+ "inner_path": "content.json",
+ "modified": 1547152339,
+ "postmessage_nonce_security": true,
+ "signers_sign": "HGOykyETw5Osr0Wp/AgjJim4vYcra/TuWFbQ5g9ZbU8VABlpZlpRA+IFFDfoWG6A6V6tySdVf3uKbuihKrRE3KM=",
+ "signs": {
+  "1LX49GcJ52xF8UGvN1obXex6u4XLwfmzZW": "HELIWLiyAiy+D6qtpmcoSqbP0tzg4AiZj6J4MPkKekAtK+XFOrwxDvDyKsOVgyizNVdCiWlwqysHcC1iG7c2UuY="
+ },
+ "signs_required": 1,
+ "title": "1LX49GcJ52xF8UGvN1obXex6u4XLwfmzZW - ZeroNet_",
+ "zeronet_version": "0.6.4"
+}
