@@ -1,0 +1,73 @@
+{
+  "db_name": "ZAME", 
+  "db_file": "data/ZAME.db", 
+  "version": 2, 
+  "maps": { 
+    ".+/data.json": { 
+      "to_table": [ 
+        {
+          "node": "map", 
+          "table": "map"
+        },
+        {
+          "node": "map_vote", 
+          "table": "map_vote", 
+          "key_col": "map_id",
+          "val_col": "vote"
+        }
+      ],
+      "to_keyvalue": ["next_map_id"]
+    },
+    ".+/content.json": {
+      "to_table": [
+        {
+          "node": "includes",
+          "table": "user",
+          "key_col": "path",
+          "import_cols": ["user_id", "user_name", "max_size", "added"],
+            
+          "replaces": {
+            "path": {"content.json": "data.json"}
+          }
+        }
+      ],
+      "to_json_table": [ "cert_auth_type", "cert_user_id" ]  
+    }
+  },
+  "tables": { 
+    "map": { 
+      "cols": [ 
+        ["id", "INTEGER"],
+        ["title", "TEXT"],
+        ["thumbnail_path", "TEXT"],
+        ["image_path", "TEXT"],
+        ["filepath", "TEXT"],
+        ["version", "TEXT"],
+        ["added", "DATETIME"],
+        ["json_id", "INTEGER REFERENCES json (json_id)"]
+      ],
+      "indexes": ["CREATE UNIQUE INDEX map_key ON map(id, json_id)", "CREATE UNIQUE INDEX map_added ON map(added)"],
+      "schema_changed": 1
+    },
+    "map_vote": { 
+      "cols": [ 
+        ["map_id", "INTEGER"],
+        ["vote", "INTEGER"],
+        ["json_id", "INTEGER REFERENCES json (json_id)"]
+      ],
+      "indexes": ["CREATE UNIQUE INDEX map_vote_key ON map_vote(map_id, json_id)", "CREATE UNIQUE INDEX vote_map_id ON map(map_id)"],
+      "schema_changed": 1
+    },
+    "json": {  
+        "cols": [
+            ["json_id", "INTEGER PRIMARY KEY AUTOINCREMENT"],
+            ["directory", "TEXT"],
+            ["file_name", "TEXT"],
+            ["cert_auth_type", "TEXT"],
+            ["cert_user_id", "TEXT"]
+        ],
+        "indexes": ["CREATE UNIQUE INDEX path ON json(directory, site, file_name)"],
+        "schema_changed": 1
+    }
+  }
+}
