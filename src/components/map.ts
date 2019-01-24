@@ -1,10 +1,10 @@
-import m from 'mithril'
+import m from "mithril";
 
 // Map display component
-let Maps= {
-    view: function() {
-        return m("h1", "Maps")
-    }
-}
+const Maps = {
+    view() {
+        return m("h1", "Maps");
+    },
+};
 
-export default Maps
+export default Maps;

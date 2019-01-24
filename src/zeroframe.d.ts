@@ -1,1 +1,1 @@
-declare module 'zeroframe';
+declare module "zeroframe";
