@@ -4,10 +4,9 @@
   "description": "ZeroNet Mithril Template",
   "private": true,
   "scripts": {
-    "start": "webpack-dev-server --open",
+    "start": "webpack --watch",
     "build": "webpack",
     "build:prod": "webpack -p",
-    "watch": "webpack --watch",
     "test": "ospec"
   },
   "repository": {
@@ -54,8 +53,7 @@
     "mithril": "^1.1.6",
     "typescript": "^3.2.4",
     "webpack": "^4.28.4",
-    "webpack-cli": "^3.2.1",
-    "webpack-dev-server": "^3.1.14"
+    "webpack-cli": "^3.2.1"
   },
   "dependencies": {
     "zeroframe": "^1.2.0"
