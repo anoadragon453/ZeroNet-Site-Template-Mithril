@@ -139,7 +139,74 @@ ospec is a minimal testing framework from the Mithril.js developers.
 
 ## Content.json
 
-TODO content.json
+`content.json` is the file that holds all of the metadata about your site, includes the address, file hashes, and what files should be considered as user data, what files shouldn't be sent to peers and so on.
+
+Explanation for each of the keys in the `content.json` included in the template is below.
+
+```javascript
+// Default content.json
+{
+ "address": "1LX49GcJ52xF8UGvN1obXex6u4XLwfmzZW",
+ "description": "ZeroNet Site Template",
+ "files": {
+  "README.md": {
+   "sha512": "b5be4a8867d401acb6f215f85aa900ab74fdcb1aad8802794359dbb54fad57da",
+   "size": 6063
+  },
+  "dbschema.json": {
+   "sha512": "edd33feaaeef761de525163755d6bc9eadc4a86e62a2a3ef85d5049247dead08",
+   "size": 1980
+  },
+  "index.html": {
+   "sha512": "71bd634e35c52f856217d29b2705115eb47f967b1c3dc849f8febac8872402fe",
+   "size": 649
+  }
+ },
+ "ignore": "(^(content|dbschema).json)|(tests.*)|(node_modules.*)|(^\\..+)",
+ "inner_path": "content.json",
+ "modified": 1547584373,
+ "signers_sign": "HGOykyETw5Osr0Wp/AgjJim4vYcra/TuWFbQ5g9ZbU8VABlpZlpRA+IFFDfoWG6A6V6tySdVf3uKbuihKrRE3KM=",
+ "signs": {
+  "1LX49GcJ52xF8UGvN1obXex6u4XLwfmzZW": "Gw8AOkVAiyg1B/HweXjmjDcq8HKvt/4tLMrxzdrh1o6APJ4E6wmdDKyyOdiRUHenZEWrNxSn8KX1+MXQuF9yTFU="
+ },
+ "signs_required": 1,
+ "title": "ZeroNet Site Template",
+ "zeronet_version": "0.6.4"
+}
+```
+
+`address` is your site address.
+
+`description` is the description of your site, and can be changed in the site sidebar through the browser.
+
+`files` is a dictionary of all the sharable files in your site. For each file it has a sha512 hash and a size. These are both used in conjunction for other peers to verify that a file they are downloading is actually the file that should be on the site. For instance, consider that I was a peer trying to download this website. First I would request this `content.json` file, which tells me what other files to download. I make a request to peers for `index.html`, but imagine one of the peers is malicious, and instead of `index.html` they send me an image of a frowny cat called `index.html`.
+
+Well I don't want this sad image, and thankfully ZeroNet will prevent that from happening, because when it receives the file from the peer, it calculates the sha512 hash and the size and checks that it matches what's listed in `content.json`. If it's not a match, ZeroNet assumes something malicious is going on and drops the file and asks someone else for it.
+
+`ignore` is a [regular expression](https://en.wikipedia.org/wiki/Regular_expression) that tells ZeroNet which files to include in the `files` key. You may have noticed there's a lot less files in the `files` key then there are in the repo, and that is due to `ignore`. Specifically, with the rule `(^(content|dbschema).json)|(tests.*)|(node_modules.*)|(^\\..+)` we are saying:
+
+* Don't allow any `.json` files except for `content.json` and `dbschema.json`. This blocks all the TypeScript, Webpack and npm config files.
+* Don't allow the `tests/` directory.
+* Don't allow the `node_modules/` directory (can you imagine syncing *that* to every peer?)
+* Don't allow any file or folder that starts with a `.`.
+
+Each of these rules is separated by `|`.
+
+`inner_path` is the relative address to this file, starting from the site root.
+
+`modified` is the UNIX timestamp of when this file was last modified. Sites using this when determining the latest version of `content.json` and thus the site. This value can be trusted as `content.json` is signed by the private key holder of the site, which peers can verify using the site's public key, which is its address.
+
+`signers_sign` TODO
+
+`signs` is a dictionary of public keys and signatures. If the signature is valid for the private key `1LX49GcJ52xF8UGvN1obXex6u4XLwfmzZW`, which is the site address, we can be confident that the information within this `content.json` came from the site administrator (assuming they did not lose their keys!).
+
+`signs_required` is a number representing the amount of private key signatures required to successfully sign this site. As of ZeroNet 0.6.4, Multi-signature is not currently implemented, so keep this value at `1`.
+
+`title` is the title of the site that will appear in the browser tab.
+
+`zeronet_version` was the version of ZeroNet that was used to sign this file.
+
+Read the ZeroNet docs on `content.json` for more info [here](https://zeronet.io/docs/site_development/content_json/).
 
 ## User Data
 
