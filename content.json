@@ -1,6 +1,6 @@
 {
  "address": "1LX49GcJ52xF8UGvN1obXex6u4XLwfmzZW",
- "description": "ZAME Map Browser",
+ "description": "ZeroNet Site Template",
  "files": {
   "README.md": {
    "sha512": "b5be4a8867d401acb6f215f85aa900ab74fdcb1aad8802794359dbb54fad57da",
@@ -15,7 +15,7 @@
    "size": 649
   }
  },
- "ignore": "(.git)|(^.+.json)|(tests.*)|(node_modules.*)|(^\\..+)",
+ "ignore": "(^(content|dbschema).json)|(tests.*)|(node_modules.*)|(^\\..+)",
  "inner_path": "content.json",
  "modified": 1547584373,
  "postmessage_nonce_security": true,
@@ -24,6 +24,6 @@
   "1LX49GcJ52xF8UGvN1obXex6u4XLwfmzZW": "Gw8AOkVAiyg1B/HweXjmjDcq8HKvt/4tLMrxzdrh1o6APJ4E6wmdDKyyOdiRUHenZEWrNxSn8KX1+MXQuF9yTFU="
  },
  "signs_required": 1,
- "title": "ZAME!",
+ "title": "ZeroNet Site Template",
  "zeronet_version": "0.6.4"
 }
