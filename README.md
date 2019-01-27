@@ -214,5 +214,9 @@ TODO database, dbschema.json
 
 ## Testing
 
+This template uses Mithril.js' [ospec](https://github.com/MithrilJS/mithril.js/tree/master/ospec) testing framework. Testing allows you to test that one or more functions are performing properly and that their functionality does not accidentally break as changes are made over time.
+
+A quickstart on how to use ospec is available [here](https://mithril.js.org/testing.html).
+
 If you have any questions or suggestions, feel free to open an issue.
 
